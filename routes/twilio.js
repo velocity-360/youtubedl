@@ -50,7 +50,6 @@ router.post('/', function(req, res, next) {
 		res.setHeader('Content-disposition', 'attachment; filename=file.mp3')
 		res.setHeader('Content-type', 'audio/mpeg')
 
-//		Streamify.streamify(url).pipe(res)
 		var stream = Streamify.streamify(url)
 
 		var client = new twilio.RestClient(accountSid, authToken)
