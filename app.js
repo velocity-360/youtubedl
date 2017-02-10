@@ -7,6 +7,7 @@ var bodyParser = require('body-parser')
 
 var routes = require('./routes/index')
 var convert = require('./routes/convert')
+var twilio = require('./routes/twilio')
 
 var app = express()
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', routes)
 app.use('/convert', convert)
+app.use('/twilio', twilio)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
