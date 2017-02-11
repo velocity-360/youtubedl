@@ -8,8 +8,6 @@ var Streamify = require('../utils/Streamify')
 
 router.get('/', function(req, res, next) {
 	var client = new twilio.RestClient(accountSid, authToken)
-
-
 	client.messages.create({
 	    body: 'Hello from Node',
 	    to: '+12037227160',  // Text this number
@@ -18,7 +16,7 @@ router.get('/', function(req, res, next) {
 	    console.log(message.sid)
 	})
 
-    res.send('respond with a resource')
+//    res.send('respond with a resource')
 })
 
 // webhook from twilio:
@@ -62,10 +60,15 @@ router.post('/', function(req, res, next) {
 		})
     }
     catch (exception) {
-		res.status(500).send(exception)
+//		res.status(500).send(exception)
+		client.messages.create({
+		    body: exception.message,
+		    to: '+12037227160',  // Text this number
+		    from: '+16467130087' // From a valid Twilio number
+		}, function(err, message) {
+		    console.log(message.sid)
+		})
     }
-
-
 
 })
 
