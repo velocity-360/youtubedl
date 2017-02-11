@@ -54,7 +54,7 @@ router.post('/', function(req, res, next) {
 	var url = 'https://www.youtube.com/watch?v='+youtubeId
 
     try {
-		var url = req.query.video
+//		var url = req.query.video
 		res.setHeader('Content-disposition', 'attachment; filename=file.mp3')
 		res.setHeader('Content-type', 'audio/mpeg')
 
@@ -73,7 +73,7 @@ router.post('/', function(req, res, next) {
 //		res.status(500).send(exception)
 		var client = new twilio.RestClient(accountSid, authToken)
 		client.messages.create({
-		    body: exception.message,
+		    body: 'ERROR: '+exception.message,
 		    to: '+12037227160',  // Text this number
 		    from: '+16467130087' // From a valid Twilio number
 		}, function(err, message) {
