@@ -60,18 +60,18 @@ router.post('/', function(req, res, next) {
 		res.setHeader('Content-disposition', 'attachment; filename=file.mp3')
 		res.setHeader('Content-type', 'audio/mpeg')
 
-		var stream = Streamify.streamify(url)
+      	Streamify.streamify(url).pipe(res)
 
-		var client = new twilio.RestClient(accountSid, authToken)
-		client.messages.create({
-		    body: 'http://184.72.68.51/convert?video=https://www.youtube.com/watch?v=8OTfjWyFSoM',
-//		    body: stream,
-//			mediaUrl: 'http://184.72.68.51/convert?video=https://www.youtube.com/watch?v=8OTfjWyFSoM',
-		    to: '+12037227160',  // Text this number
-		    from: '+16467130087' // From a valid Twilio number
-		}, function(err, message) {
-		    console.log(message.sid)
-		})
+		// var stream = Streamify.streamify(url)
+
+		// var client = new twilio.RestClient(accountSid, authToken)
+		// client.messages.create({
+		//     body: 'http://184.72.68.51/convert?video=https://www.youtube.com/watch?v=8OTfjWyFSoM',
+		//     to: '+12037227160',  // Text this number
+		//     from: '+16467130087' // From a valid Twilio number
+		// }, function(err, message) {
+		//     console.log(message.sid)
+		// })
    }
    catch (exception) {
 //		res.status(500).send(exception)
