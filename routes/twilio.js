@@ -28,36 +28,45 @@ router.post('/', function(req, res, next) {
 	// "NumSegments":"1","MessageSid":"SM0a1de785280d9cce83cd5585741354b7",
 	// "AccountSid":"AC817c36f0cdb7e4d489c5e2586a149095","From":"+12037227160","ApiVersion":"2010-04-01"}
 
-	// tiIjXGj2u8g
-	var message = req.body['Body']
-	var parts = message.split('?v=')
-	if (parts.length < 2){
-		//error
-	}
+	client.messages.create({
+	    body: 'TEST REPLY',
+	    to: '+12037227160',  // Text this number
+	    from: '+16467130087' // From a valid Twilio number
+	}, function(err, message) {
+	    console.log(message.sid)
+	})
 
-	var youtubeId = parts[1]
-	if (youtubeId.length < 11){
-		//error
-	}
 
-	youtubeId = youtubeId.substring(11)
-	var url = 'https://www.youtube.com/watch?v='+youtubeId
 
-    try {
-		var url = req.query.video
-		res.setHeader('Content-disposition', 'attachment; filename=file.mp3')
-		res.setHeader('Content-type', 'audio/mpeg')
+	// var message = req.body['Body']
+	// var parts = message.split('?v=')
+	// if (parts.length < 2){
+	// 	//error
+	// }
 
-		var stream = Streamify.streamify(url)
+	// var youtubeId = parts[1]
+	// if (youtubeId.length < 11){
+	// 	//error
+	// }
 
-		var client = new twilio.RestClient(accountSid, authToken)
-		client.messages.create({
-		    body: stream,
-		    to: '+12037227160',  // Text this number
-		    from: '+16467130087' // From a valid Twilio number
-		}, function(err, message) {
-		    console.log(message.sid)
-		})
+	// youtubeId = youtubeId.substring(11)
+	// var url = 'https://www.youtube.com/watch?v='+youtubeId
+
+ //    try {
+	// 	var url = req.query.video
+	// 	res.setHeader('Content-disposition', 'attachment; filename=file.mp3')
+	// 	res.setHeader('Content-type', 'audio/mpeg')
+
+	// 	var stream = Streamify.streamify(url)
+
+	// 	var client = new twilio.RestClient(accountSid, authToken)
+	// 	client.messages.create({
+	// 	    body: stream,
+	// 	    to: '+12037227160',  // Text this number
+	// 	    from: '+16467130087' // From a valid Twilio number
+	// 	}, function(err, message) {
+	// 	    console.log(message.sid)
+	// 	})
     }
     catch (exception) {
 //		res.status(500).send(exception)
