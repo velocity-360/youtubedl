@@ -64,8 +64,9 @@ router.post('/', function(req, res, next) {
 
 		var client = new twilio.RestClient(accountSid, authToken)
 		client.messages.create({
+		    body: 'TEST',
 //		    body: stream,
-			media: 'http://i.imgur.com/jCEv2pg.jpg',
+//			media: 'http://i.imgur.com/jCEv2pg.jpg',
 		    to: '+12037227160',  // Text this number
 		    from: '+16467130087' // From a valid Twilio number
 		}, function(err, message) {
