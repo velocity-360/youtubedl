@@ -51,7 +51,7 @@ router.post('/', function(req, res, next) {
 		//error
 	}
 
-	youtubeId = youtubeId.substring(11)
+	youtubeId = youtubeId.substring(0, 11)
 	console.log('YOUTUBE ID: '+youtubeId)
 	var url = 'https://www.youtube.com/watch?v='+youtubeId
 
