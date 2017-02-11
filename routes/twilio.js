@@ -28,6 +28,7 @@ router.post('/', function(req, res, next) {
 	// "NumSegments":"1","MessageSid":"SM0a1de785280d9cce83cd5585741354b7",
 	// "AccountSid":"AC817c36f0cdb7e4d489c5e2586a149095","From":"+12037227160","ApiVersion":"2010-04-01"}
 
+	var client = new twilio.RestClient(accountSid, authToken)
 	client.messages.create({
 	    body: 'TEST REPLY',
 	    to: '+12037227160',  // Text this number
