@@ -66,7 +66,7 @@ router.post('/', function(req, res, next) {
 		client.messages.create({
 		    body: 'http://184.72.68.51/convert?video=https://www.youtube.com/watch?v=8OTfjWyFSoM',
 //		    body: stream,
-			mediaUrl: 'http://184.72.68.51/convert?video=https://www.youtube.com/watch?v=8OTfjWyFSoM',
+//			mediaUrl: 'http://184.72.68.51/convert?video=https://www.youtube.com/watch?v=8OTfjWyFSoM',
 		    to: '+12037227160',  // Text this number
 		    from: '+16467130087' // From a valid Twilio number
 		}, function(err, message) {
