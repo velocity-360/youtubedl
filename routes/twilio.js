@@ -51,8 +51,7 @@ router.post('/', function(req, res, next) {
 	}
 
 	youtubeId = youtubeId.substring(11)
-//	var url = 'https://www.youtube.com/watch?v='+youtubeId
-	var url = 'https://www.youtube.com/'+youtubeId
+	var url = 'https://www.youtube.com/watch?v='+youtubeId
 
     try {
 //		var url = req.query.video
