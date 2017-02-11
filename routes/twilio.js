@@ -41,6 +41,7 @@ router.post('/', function(req, res, next) {
 
 	var message = req.body['Body']
 	var parts = message.split('?v=')
+	console.log('PARTS: '+JSON.stringify(parts))
 	if (parts.length < 2){
 		//error
 	}
@@ -51,6 +52,7 @@ router.post('/', function(req, res, next) {
 	}
 
 	youtubeId = youtubeId.substring(11)
+	console.log('YOUTUBE ID: '+youtubeId)
 	var url = 'https://www.youtube.com/watch?v='+youtubeId
 
     try {
