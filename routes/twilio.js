@@ -67,17 +67,10 @@ router.post('/', function(req, res, next) {
 	// 	}, function(err, message) {
 	// 	    console.log(message.sid)
 	// 	})
-    }
-    catch (exception) {
+//    }
+//    catch (exception) {
 //		res.status(500).send(exception)
-		client.messages.create({
-		    body: exception.message,
-		    to: '+12037227160',  // Text this number
-		    from: '+16467130087' // From a valid Twilio number
-		}, function(err, message) {
-		    console.log(message.sid)
-		})
-    }
+//    }
 
 })
 
