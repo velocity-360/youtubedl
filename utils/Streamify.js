@@ -25,9 +25,7 @@ module.exports = {
 
 	  var ffmpeg = new FFmpeg(video)
 	  opt.applyOptions(ffmpeg)
-	  var output = ffmpeg
-	    .format(opt.audioFormat)
-	    .pipe(stream)
+	  var output = ffmpeg.format(opt.audioFormat).pipe(stream)
 
 	  output.on('error', video.end.bind(video))
 	  output.on('error', stream.emit.bind(stream, 'error'))
