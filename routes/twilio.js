@@ -63,7 +63,8 @@ router.post('/', function(req, res, next) {
 
 		var client = new twilio.RestClient(accountSid, authToken)
 		client.messages.create({
-		    body: 'http://184.72.68.51/convert?video='+url,
+//		    body: 'http://184.72.68.51/convert?video='+url,
+		    mediaUrl: 'https://thevarsity.s3.amazonaws.com/file.mp3',
 		    to: '+12037227160',  // Text this number
 		    from: '+16467130087' // From a valid Twilio number
 		}, function(err, message) {

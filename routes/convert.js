@@ -48,7 +48,7 @@ router.get('/', function(req, res, next) {
 			var filePath = path.join('tmp', 'file.mp3').replace('routes/', '')
 			fetchFile(filePath)
 			.then(function(file){
-				console.log('FILE FETCHED: '+file.size)
+//				console.log('FILE FETCHED: '+file.size)
 				superagent
 				.put(uploadUrl)
 				.send(file)
