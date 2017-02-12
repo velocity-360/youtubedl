@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router()
 var Streamify = require('../utils/Streamify')
-var APIManager = require('../utils/APIManager')
+var TextUtils = require('../utils/TextUtils')
 var path = require('path')
 var aws = require('aws-sdk')
 var superagent = require('superagent')
@@ -21,19 +21,25 @@ var fetchFile = function(path){
 router.get('/', function(req, res, next) {
     try {
 		var url = req.query.video
-		// res.setHeader('Content-disposition', 'attachment; filename=file.mp3')
-		// res.setHeader('Content-type', 'audio/mpeg')
-		// Streamify.streamify(url).pipe(res)
+		var format = req.query.format || 'save'
+
+		if (format == 'stream'){
+			res.setHeader('Content-disposition', 'attachment; filename=file.mp3')
+			res.setHeader('Content-type', 'audio/mpeg')
+			Streamify.streamify(url).pipe(res)
+			return
+		}
 
 		var filePath = path.join('tmp', 'file.mp3').replace('routes/', '')
 		var stream = Streamify.streamify(url, {file: filePath})
 		stream.on('finish', function(){
+			var filename = TextUtils.randomString(8)+'.mp3'
 
 			// upload to S3:
 			var s3 = new aws.S3()
 			const s3Params = {
 			    Bucket: 'thevarsity',
-			    Key: 'file.mp3',
+			    Key: filename,
 			    Expires: 3600,
 			    ContentType: 'audio/mpeg',
 			    ACL: 'public-read'
@@ -59,7 +65,8 @@ router.get('/', function(req, res, next) {
 							return
 						}
 						
-					    console.log('UPLOAD SUCCESS: https://thevarsity.s3.amazonaws.com/file.mp3')
+					    // console.log('UPLOAD SUCCESS: https://thevarsity.s3.amazonaws.com/'+filename)
+					    console.log('UPLOAD SUCCESS: ')
 					})
 				})
 				.catch(function(err){
@@ -69,8 +76,7 @@ router.get('/', function(req, res, next) {
 	    })
 
 		res.json({
-			confirmation: 'success',
-			path: '/file.mp3'
+			confirmation: 'success'
 		})
     } 
     catch (exception) {
