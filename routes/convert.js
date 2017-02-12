@@ -10,7 +10,8 @@ router.get('/', function(req, res, next) {
       // res.setHeader('Content-type', 'audio/mpeg')
       // Streamify.streamify(url).pipe(res)
 
-	  var filePath = path.join(__dirname, 'public', 'tmp/file.mp3').replace('routes/', '')
+//	  var filePath = path.join(__dirname, 'public', 'tmp/file.mp3').replace('routes/', '')
+	  var filePath = path.join('tmp', 'file.mp3').replace('routes/', '')
       var stream = Streamify.streamify(url, {file: filePath})
 //      console.log('STREAM: '+JSON.stringify(stream))
 
