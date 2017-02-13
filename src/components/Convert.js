@@ -15,30 +15,29 @@ class Convert extends Component {
 		})
 	}
 
-	convertVideo(){
-//		console.log('convertVideo')
+	convertVideo(event){
+		event.preventDefault()
 
 		// automatically invoke download:
-//		window.location.href = '/convert?video=https://www.youtube.com/watch?v=1vjAUgaUbMw&format=stream'
 		window.location.href = '/convert?video='+this.state.youtube+'&format=stream'
-
-		// APIClient.handleGet('/convert', {video:'https://www.youtube.com/watch?v=1vjAUgaUbMw', format:'stream'})
-		// .then(response => {
-
-		// })
-		// .catch(err => {
-
-		// })
 
 	}
 
 	render(){
 		return (
-			<div>
-				Convert Component<br />
-				<input onChange={this.updateYoutubeLink.bind(this)} type="text" placeholder="YouTube Link" /><br />
-				<button onClick={this.convertVideo.bind(this)}>Convert File</button>
-			</div>
+			<nav className="navbar navbar-default">
+			    <div className="container-fluid">
+				    <div className="navbar-header">
+						<form className="navbar-form navbar-left" role="search">
+						    <div className="form-group">
+								<input className="form-control" onChange={this.updateYoutubeLink.bind(this)} type="text" placeholder="YouTube Link" />
+						    </div>
+							<button style={{marginLeft:12}} className="btn btn-default" onClick={this.convertVideo.bind(this)}>Convert File</button>
+						</form>
+				    </div>
+			    </div>
+			</nav>
+
 		)
 	}
 }
